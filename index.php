@@ -3,16 +3,16 @@
 <head>
 
     <!-- CSS (load bootstrap) -->
-    <link rel="stylesheet" href="script.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style>
         .navbar { border-radius:0; }
     </style>
 
-    <script src="script.js"></script>
-
-
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="app.js"></script>
 </head>
-
 <!-- apply our angular app to our site -->
 <body ng-app="routerApp">
 
