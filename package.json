@@ -1,0 +1,22 @@
+{
+  "name": "airlines-version-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlinZeka/airlines-version-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlinZeka/airlines-version-2/issues"
+  },
+  "homepage": "https://github.com/BlinZeka/airlines-version-2#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
