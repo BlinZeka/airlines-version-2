@@ -91,8 +91,11 @@ function getUser()
     $query=pg_query($db,"SELECT * FROM  users  WHERE username='$username' and hash_password='$password';");
  
      $result=pg_fetch_all($query);
+     
 
-  print_r(json_encode($result));
+   print_r(json_encode($result));
+
+  
 }
 
 function createUser()

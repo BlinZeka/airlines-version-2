@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  >
+<html  ng-app="Task"  >
 <head>
 
     <!-- CSS (load bootstrap) -->
@@ -33,22 +33,22 @@
     
 </head>
 <!-- apply our angular app to our site -->
-<body ng-app="Task" >
+<body ng-controller="appCTRL">
 
 <!-- NAVIGATION -->
-<nav class="navbar navbar-inverse" role="navigation">
+<div class="navbar navbar-inverse menubar" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" href="#/index">AngularUI Router</a>
     </div>
-    <ul class="nav navbar-nav">
-        <li><a href="#/home">Home</a></li>
-        <li><a href="#/admin">Admin View</a></li>
+    <ul  class="nav navbar-nav">
+        <li><a ng-if="showLogOut" href="#/home">Home</a></li>
+        <li><a ng-if="admin && showLogOut" href="#/admin">Admin View</a></li>
     </ul>
     <ul class="nav navbar-nav" style="float: right;">
-        <li ><a href="#/login">Log in</a></li>
-        <li ng-show="showLogOut"><a href="#/logout">Log out</a></li>
+        <li ng-if="!(showLogOut)"><a href="#/login">Log in</a></li>
+        <li ng-if="showLogOut" ng-click="LogOut()" ><a href="#/login">Log out</a></li>
     </ul>
-</nav>
+</div>
 
 <!-- MAIN CONTENT -->
 <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
@@ -68,7 +68,8 @@
 <script src="../frontend/javascript/modules/app.js"></script>
 <script src="../frontend/javascript/modules/home.js"></script>
 <script src="../frontend/javascript/modules/login.js"></script>   
-<script src="../frontend/javascript/modules/admin.js"></script>  
+<script src="../frontend/javascript/modules/admin.js"></script>
+<script src="../frontend/javascript/modules/signup.js"></script>  
     
 </body>
 </html>

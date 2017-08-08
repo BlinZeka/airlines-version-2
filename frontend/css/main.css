@@ -5,6 +5,7 @@
 	margin-bottom: 50px;
 }
 
+
 .tblTask table
 {
 	border-collapse: collapse;
@@ -23,6 +24,8 @@
 	margin-top:50px;
 	margin-bottom: 50px;
 }
+
+body{font-family: Verdana;}
 
 .btnDetails
 {
@@ -51,7 +54,7 @@
 .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
   margin-bottom: 0; }
 
-  .dialogdemoThemeInheritance .container {
+.dialogdemoThemeInheritance .container {
   text-align: center; }
 
 
@@ -76,13 +79,22 @@
     margin: 8px 0;
     border: none;
     cursor: pointer;
+    border-radius: 15px;
 }
 
 .frmLogin {
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
-	padding-left:15%;
+ /*   padding: 20px;*/
+	padding-left:8%;
 	margin-bottom: 10%;
 }
 
+.signup
+{
+  color: #3377ab;
+}
+
+.signup:visited {
+    color: #3377ab;
+}

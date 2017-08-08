@@ -8,39 +8,74 @@
 		});
 }])
 
-.controller('LogInCtrl',['$scope','$http','ParamsFrom_Home',function ($scope,$http,ParamsFrom_Home){  
+.directive( 'goClick', function ( $location ) {
+  return function ( scope, element, attrs ) {
+    var path;
 
-	$scope.showLogOut=true;
+    attrs.$observe( 'goClick', function (val) {
+      path = val;
+    });
 
-	console.log($scope.showLogOut);
+    element.bind( 'click', function () {
+      scope.$apply( function () {
+        $location.path( path );
+      });
+    });
+  };
+})
 
-	$scope.btnLogin=function()
+.controller('LogInCtrl',['$scope','$http','$location','ParamsFrom_Home',function ($scope,$http,$location,ParamsFrom_Home){  
+    
+}])
+
+.controller('appCTRL',['$scope','$http','$location','ParamsFrom_Home',function ($scope,$http,$location,ParamsFrom_Home){
+
+		$scope.showLogOut = false;
+		console.log("appCTRL");
+		var a="";
+		ParamsFrom_Home.setProperty(1);
+		a=ParamsFrom_Home.getProperty();
+		console.log(a);
+
+		$scope.a1=true;
+
+	$scope.btnLogin1=function(params)
 	{
-		// console.log(12);
-		// $scope.showLogOut=true;
-		// console.log($scope.showLogOut);
-
-		$http({
-			method: 'GET', //CHANGE THIS FROM GET TO POST
+		 console.log(params);
+		 		$http({
+			method: 'POST', //CHANGE THIS FROM GET TO POST
 			url: 'Database/Function.php?f=getUser',
-			params: { userN : $scope.username , passW:$scope.password }, //USE PROPER JAVASRIPT OBJECTS
+			params: { userN : params.Username , passW:params.Password }, //USE PROPER JAVASRIPT OBJECTS
 
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 
 			}).then(function (response) 
 			{
-				if(response.data == false)
+				if(response.data.length== 1)
 				{
 					//sweet alert warning ->you heve fill in wrong way fields
+
+						console.log('Click event');
+						$scope.showLogOut = true;
+
+						if(response.data["0"].role_user == 'Admin'){
+							$scope.admin = true;
+						}
+
+					$location.path('/home');
+
 				}
 				else
 				{
-					//send to home 
+							swal('BUGG i lojes!');
+
 				}
-			   console.log(response.data);
+						   console.log(response.data);
 			
 			})
-	}
-  
-    
+		}
+		$scope.LogOut=function()
+		{
+			$scope.showLogOut=false;
+		}
 }]);

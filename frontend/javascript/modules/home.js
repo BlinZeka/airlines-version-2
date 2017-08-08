@@ -9,9 +9,8 @@
 		});
 		
 }])
-    
 
-    .service('ParamsFrom_Home', function () {
+.service('ParamsFrom_Home', function () {
         var propertyShowInput = '';
 
         return {
@@ -20,9 +19,11 @@
             },
             setProperty: function(value) {
                 propertyShowInput = value;
+                
             }
         };
     })
+
 
 
 .controller('TaskCtrl',['$scope','$http','ParamsFrom_Home',function ($scope,$http,ParamsFrom_Home){  
@@ -36,16 +37,31 @@
 	$scope.statusi = 'Progress';
 	var savetask_forEdit="";
 	var savetask_forEdit2="";
-	$scope.admin =true;
+	// $scope.admin1 =true;
 
-	var a=ParamsFrom_Home.getProperty();
+	// $scope.showLogOut = true;
+
+	
 	
 
-	console.log(a);
-	if( a = 1 )
-		{ $scope.showLogOut=true;}
-	else if ( a != 1 )
-		 { $scope.showLogOut=false;}
+	// $scope.showLogOut = true;
+	
+
+	// if( a == 11 )
+	// 	{	
+			
+	// 		console.log(' if');
+	// 		$scope.showLogOut = true;
+	// 	}
+	// else if ( a != 11 )
+	// 	 { 
+	// 	 	// $scope.showLogOut=false;
+	// 	 	console.log('else if');
+	// 	 }
+
+
+
+
 
 	$scope.ShowInputs=function(i,task){
 
@@ -130,6 +146,16 @@
 
 		$scope.tasks=response.data;
 		$scope.length = $scope.filtered.length;
+
+		$scope.numrimin = 0;
+		$scope.numrimax = 3;
+		
+		if($scope.length<3)
+			$scope.numrimax =$scope.length;
+		
+
+
+
 		});
 	}
 

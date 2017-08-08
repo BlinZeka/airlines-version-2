@@ -1,7 +1,15 @@
+<?php
+		// IF ($_SESSION('role')!= 'admin'){
+		// 	require 'notAvaiable.php';
+		// 	return false;
+		// } ... 
+?>
+
+
 <div class="TaskMenager">
 	<div class="row" ng-hide="hideTableAndAddForm">
-	<div ng-if='admin'>
-		<form ng-submit="addTask(task)">
+	<div ng-show="admin">
+		<form ng-submit="addTask(task)" >
 			
 			<input type="text" name="temp" ng-model="task.taskname" value={{task.taskname}} >
 			<select class="btn" ng-model = "task.status" value="{{task.status}}">
@@ -41,10 +49,10 @@
 						{{task.date_created | date: "yyyy-MM-dd HH:mm:ss"}}
 					</td>
 					<td ng-click="getId($index)">
-						<button class="btn btnMore" ng-click="showDetails(task)">...More</button>
-						<button class="btn btnEdit" ng-click="EditFrm(task)" ng-if='admin'>Edit</button>
-						<button class="btn btnDetails" ng-click="DeleteTask(task)" ng-if='admin'>Delete</button>
-						<button class="btn " ng-if="inputShow == $index && admin" ng-click="editTask1(task)">Update </button>
+						<button class="btn btnMore" ng-click="showDetails(task)" >...More</button>
+						<button class="btn btnEdit" ng-click="EditFrm(task)" ng-if='admin' ng-show="admin">Edit</button>
+						<button class="btn btnDetails" ng-click="DeleteTask(task)" ng-if='admin' ng-show="admin">Delete</button>
+						<button class="btn " ng-if="inputShow == $index && admin" ng-click="editTask1(task)" ng-show="admin">Update </button>
 					</td>
 				</tr>
 			</table>
