@@ -10,23 +10,9 @@
 		
 }])
 
-.service('ParamsFrom_Home', function () {
-        var propertyShowInput = '';
-
-        return {
-            getProperty: function () {
-                return propertyShowInput;
-            },
-            setProperty: function(value) {
-                propertyShowInput = value;
-                
-            }
-        };
-    })
 
 
-
-.controller('TaskCtrl',['$scope','$http','ParamsFrom_Home',function ($scope,$http,ParamsFrom_Home){  
+.controller('TaskCtrl',['$scope','$http',function ($scope,$http){  
 	
 	
 
@@ -37,30 +23,18 @@
 	$scope.statusi = 'Progress';
 	var savetask_forEdit="";
 	var savetask_forEdit2="";
-	// $scope.admin1 =true;
 
-	// $scope.showLogOut = true;
-
-	
-	
-
-	// $scope.showLogOut = true;
-	
-
-	// if( a == 11 )
-	// 	{	
-			
-	// 		console.log(' if');
-	// 		$scope.showLogOut = true;
-	// 	}
-	// else if ( a != 11 )
-	// 	 { 
-	// 	 	// $scope.showLogOut=false;
-	// 	 	console.log('else if');
-	// 	 }
-
-
-
+	$scope.checkIfEmpty=function(){
+		if($scope.selected==null || $scope.selected=="" || $scope.selected==" ")
+		{
+			$scope.ex = {width:'10px '};
+			console.log($scope.selected);
+		}
+		else {
+			$scope.ex = {width:'350px '};  
+			console.log("else");
+		}
+	}
 
 
 	$scope.ShowInputs=function(i,task){
@@ -140,7 +114,8 @@
 
 		
 		});
-	$scope.AllTaskShow=function(){
+	$scope.AllTaskShow=function()
+	{
 		$http.get("Database/Function.php?f=getTask")
 		.then(function (response) {
 
@@ -151,10 +126,7 @@
 		$scope.numrimax = 3;
 		
 		if($scope.length<3)
-			$scope.numrimax =$scope.length;
-		
-
-
+			$scope.numrimax =$scope.length;	
 
 		});
 	}

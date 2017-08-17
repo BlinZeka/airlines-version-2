@@ -88,18 +88,59 @@ function getUser()
     $username= pg_escape_string($_GET['userN']);
     $password = pg_escape_string($_GET['passW']);
 
-    $query=pg_query($db,"SELECT * FROM  users  WHERE username='$username' and hash_password='$password';");
- 
-     $result=pg_fetch_all($query);
-     
+    //Username should be unique otherwase this logic dose not work
+    $GetSaltQuery=pg_query($db,"SELECT salt_password FROM  users  WHERE username='$username' ;");
+
+    $Salt=pg_fetch_row($GetSaltQuery);
+
+    $hash_pass=hash('md5',"$password"."$Salt[0]");
+    $getUserData=pg_query($db,"SELECT * FROM  users  WHERE username='$username' and hash_password='$hash_pass';");
+
+    $result=pg_fetch_all($getUserData);
+    
+
+
 
    print_r(json_encode($result));
 
   
 }
 
+function addUser()
+{ 
+   require 'db_connect.php';   
+
+    $Username = pg_escape_string($_GET['username']);     
+    $Password = pg_escape_string($_GET['password']); 
+    $Role_User='User';
+
+    $salt_random=generateRandomString();//nr i rastit
+    $hash_pass=hash('md5',"$Password"."$salt_random");//hash metoda  
+
+       
+    
+   $query = pg_query($db, "INSERT into Users(Username,Salt_Password,Hash_Password,Role_User) values ('$Username','$salt_random','$hash_pass','User');");  
+
+    print_r($hash_pass); 
+
+}
+
+
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+
+    for ($i = 0; $i < $length; $i++) 
+    {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    return $randomString;
+}
+
 function createUser()
 {
-  echo hash('md5', 'messagess AKA in this case should be password+salt_pas');
+
 }
 ?>

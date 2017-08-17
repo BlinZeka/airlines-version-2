@@ -5,8 +5,11 @@
 		when('/login',{
 			templateUrl:"frontend/views/Login.php",
 			controller:"LogInCtrl"
-		});
+		})
+		
 }])
+
+
 
 .directive( 'goClick', function ( $location ) {
   return function ( scope, element, attrs ) {
@@ -24,23 +27,116 @@
   };
 })
 
-.controller('LogInCtrl',['$scope','$http','$location','ParamsFrom_Home',function ($scope,$http,$location,ParamsFrom_Home){  
+.service('SRV_app_signup', function () {
+
+        var param = '';
+
+        return {
+            getPOne: function () {
+                return param;
+            },
+            setPOne: function(value) {
+                param = value;
+                return param;
+                
+            }
+        };
+    })
+
+.controller('LogInCtrl',['$scope','$http','$location',function ($scope,$http,$location){  
     
 }])
 
-.controller('appCTRL',['$scope','$http','$location','ParamsFrom_Home',function ($scope,$http,$location,ParamsFrom_Home){
+.controller('SignUpCtrl',['$scope','$http','$location','SRV_app_signup',function($scope,$http,$location,SRV_app_signup){
+
+}])
+
+.controller('appCTRL',['$scope','$http','$location','SRV_app_signup',function ($scope,$http,$location,SRV_app_signup){
 
 		$scope.showLogOut = false;
-		console.log("appCTRL");
-		var a="";
-		ParamsFrom_Home.setProperty(1);
-		a=ParamsFrom_Home.getProperty();
-		console.log(a);
+		$scope.showFrmLogin=true;
+		$scope.showFooter=false;
 
-		$scope.a1=true;
+			var a="";
+	
+	$scope.signup=function(params)
+	{
+		// console.log(params.password.length);
+		$scope.validPassword="";
+		
+		if (!(params) || !(params.username) || !(params.password) || !(params.ConfirmPassword))
+		{
+			
+			swal(
+  				'Please fill all inputs!',
+  				'',
+  				'warning'
+			)
+			
+		}
+		else if(params.password.length < 8)
+			{
+				$scope.error="Password should have more then 8 characters!";			
+			}
+
+		else if(params.password != params.ConfirmPassword)
+			{
+				$scope.error="Confirm password is not the same thet password !";
+			}
+
+		else 
+		{
+			
+
+			swal(
+	  			'Success you join as User!',
+	  			'',
+	  			'success'
+				)
+
+			$http({
+				method:'POST', //CHANGE THIS FROM GET TO POST
+				url: 'Database/Function.php?f=addUser',
+				params: { username:params.username, password:params.password }, //USE PROPER JAVASRIPT OBJECTS
+
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+
+				}).then(function (response) 
+				{
+				    
+				})
+
+				var a=SRV_app_signup.setPOne('ShowInputForUser');
+				console.log(a);
+				$location.path('/home');
+				$scope.showLogOut = true;
+				$scope.showFooter=true;
+
+		}
+			
+	}
+
+	$scope.showLogin=function()
+	{
+		console.log(112);
+		$scope.showFrmSignup=false;
+		$scope.showFrmLogin=true;
+		$scope.showFooter=false;
+	}
+
+	$scope.showSignupFrm=function()
+	{
+		console.log(11);
+		$scope.showFrmSignup=true;
+		$scope.showFrmLogin=false;
+		$scope.showFooter=false;
+	}
+	// 
 
 	$scope.btnLogin1=function(params)
 	{
+			
+		
 		 console.log(params);
 		 		$http({
 			method: 'POST', //CHANGE THIS FROM GET TO POST
@@ -67,15 +163,24 @@
 				}
 				else
 				{
-							swal('BUGG i lojes!');
+						swal('Wrong this user not exist!');
 
 				}
-						   console.log(response.data);
+				 console.log(response.data);
+				 $scope.showFooter=true;
 			
 			})
-		}
-		$scope.LogOut=function()
-		{
-			$scope.showLogOut=false;
-		}
+	}
+
+	$scope.LogOut=function()
+	{
+		$scope.showLogOut=false;
+
+		$scope.showFrmSignup=false;
+		$scope.showFrmLogin=true;
+		$scope.showFooter=false;
+		location.relode();
+	}
+
+
 }]);

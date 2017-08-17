@@ -7,21 +7,26 @@
 
 
 <div class="TaskMenager">
-	<div class="row" ng-hide="hideTableAndAddForm">
+	<div class="tbl" ng-hide="hideTableAndAddForm">
 	<div ng-show="admin">
 		<form ng-submit="addTask(task)" >
-			
-			<input type="text" name="temp" ng-model="task.taskname" value={{task.taskname}} >
-			<select class="btn" ng-model = "task.status" value="{{task.status}}">
-				  <option value="New">New</option>
-				  <option value="Started">Started</option>
-				  <option value="Progress">Progress</option>
-				  <option value="Finished">Finished</option>
-			</select>
-			<input type="submit" class="btn" name="addTask" value="Add_Task" > 
+			<table class="tblAddTask">
+				<tr>
+					<td><input type="text" class="input1" name="temp" ng-model="task.taskname" placeholder="Name of new Task"></td>
+					<td>
+						<select class="btn" ng-model = "task.status" ">
+						  <option value="New">New</option>
+						  <option value="Started">Started</option>
+						  <option value="Progress">Progress</option>
+						  <option value="Finished">Finished</option>
+						</select>
+					</td>
+					<td><input type="submit" class="btn" name="addTask" value="Add_Task" > </td>
+				</tr>
+			</table>
 		</form>
 	</div>
-	<div>Search:<input type="" name="" ng-model="selected" ng-keyup="AllTaskShow()"></div>
+	<div><input type="text"  ng-model="selected" ng-keyup="AllTaskShow()" placeholder="Search.." class="SearchTaskInTable" ng-style='ex' placeholder="Status" ng-blur="checkIfEmpty()" ng-focus="ex={width:'350px '};"></div>
 <!--   -->
 	<div class="tableTaskData" >
 
@@ -49,10 +54,10 @@
 						{{task.date_created | date: "yyyy-MM-dd HH:mm:ss"}}
 					</td>
 					<td ng-click="getId($index)">
-						<button class="btn btnMore" ng-click="showDetails(task)" >...More</button>
-						<button class="btn btnEdit" ng-click="EditFrm(task)" ng-if='admin' ng-show="admin">Edit</button>
-						<button class="btn btnDetails" ng-click="DeleteTask(task)" ng-if='admin' ng-show="admin">Delete</button>
-						<button class="btn " ng-if="inputShow == $index && admin" ng-click="editTask1(task)" ng-show="admin">Update </button>
+						<button class="btn btn-info btnMore" ng-click="showDetails(task)" >...More</button>
+						<button class="btn btn-success btnEdit" ng-click="EditFrm(task)" ng-if='admin' ng-show="admin">Edit</button>
+						<button class="btn btn-danger btnDetails" ng-click="DeleteTask(task)" ng-if='admin' ng-show="admin">Delete</button>
+						<button class="btn btn-primary " ng-if="inputShow == $index && admin" ng-click="editTask1(task)" ng-show="admin">Update </button>
 					</td>
 				</tr>
 			</table>
@@ -78,27 +83,51 @@
 
 
 
-	<div class="frmEdit" ng-show="showFrmEdit">
+	<div class="frmEdit well" ng-show="showFrmEdit">
 		
 		<form ng-submit="editTask()" >
-			<input type="text" name="IdOfTask" ng-model="id_task" ng-show="HideIdOfTask">
-			Task Name:<input id="idTask" type="text" id="taskName" ng-model="name" ng-keyup="checkIfChange()"><br>
-			<label>Task Status:
-				<select class="btn" ng-model="status" ng-change="checkIfChange()" value="status">
-					  <option value="New" default>New</option>
-					  <option value="Started">Started</option>
-					  <option value="Progress">Progress</option>
-					  <option value="Finished">Finished</option>
-				</select>
-			</label><br>
-			<label>Task Details:<textarea rows="12" cols="100" ng-model="details" ng-keyup="checkIfChange()">{{details}}</textarea></label><br>
-			<label>Task Date of create:{{time |  date: "yyyy-MM-dd HH:mm:ss"}}</label><br>
+			<fieldset>
+				<legend>Edite Task</legend>
+					<input type="text" name="IdOfTask" ng-model="id_task" ng-show="HideIdOfTask">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Task Name</label>
+						<div>
+							<input type="text" id="taskName" class="input1" ng-model="name" ng-keyup="checkIfChange()">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Task Status</label>
+						<div>
+							<select class="btn" ng-model="status" ng-change="checkIfChange()" value="status">
+								  <option value="New" default>New</option>
+								  <option value="Started">Started</option>
+								  <option value="Progress">Progress</option>
+								  <option value="Finished">Finished</option>
+							</select>
+						</div>
+					</div>
 
-			<input type="submit" class="btn" name="editTask" value="Edit Task" ng-disabled="submit">
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Task Details</label>
+						<div>
+							<textarea rows="7" class="textDetails" ng-model="details" ng-keyup="checkIfChange()">{{details}}</textarea>
+						</div>
+					</div>
+
+					<div>
+						<label class="col-lg-2 control-label">Task Date of create</label>
+						<div>
+							{{time |  date: "yyyy-MM-dd HH:mm:ss"}}
+						</div>
+					</div>
+				
+
+			<input type="submit" class="btn btnEA" name="editTask" value="Edit Task" ng-disabled="submit">
+			</fieldset>
 		</form>
-			<button class="btn" ng-click="showAddFormFROMeditFrm()" style=" margin-left:85%;" >Add New</button>
-
-		<hr>
+			<button class="btn btnEA" ng-click="showAddFormFROMeditFrm()" style=" right:5%;" >Add New</button>
+		<br><br>
+		
 	</div>
 
 	
