@@ -17,7 +17,7 @@ gulp.task('php', function () {
 });
 
 
-gulp.task('serve',['minify-app-css', 'php'],function()
+gulp.task('serve',['minify-app-css','minify-app-js','php'],function()
 {
 	browserSync.init({
 					host:'localhost',
@@ -33,7 +33,7 @@ gulp.task('serve',['minify-app-css', 'php'],function()
 	// If JS file change->this part not work
     gulp.watch('frontend/javascript/modules/*.js',['minify-app-js']);
     gulp.watch('frontend/javascript/modules/*.js').on('change', reload);
-    
+
 	//If PHP file change
 
 
