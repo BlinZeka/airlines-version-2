@@ -46,7 +46,6 @@
 
 
 .controller('AdminIndexCtrl',['$scope',function($scope){
-	console.log('Thisisss is AdminIndex');
 	$scope.slides = [
             {image: 'http://legacy.clutterfairyhouston.com/wp-content/uploads/2013/08/Depositphotos_25224381-dry-erase-board-to-do-list-everything-frown-face-1024x1024.jpg', description: 'Image 00'},
             {image: 'https://jobs.viktre.com/wp-content/uploads/2017/05/Task-Management.jpg',description: 'Image 01'},
@@ -70,7 +69,7 @@
         $scope.prevSlide = function () {
             $scope.direction = 'left';
             $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-            console.log(44);
+
         };
 
         $scope.nextSlide = function () {

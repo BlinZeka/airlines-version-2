@@ -11,10 +11,8 @@
 .controller('SignUpCtrl',['$scope','$http','$location','ParamsFrom_Home',function($scope,$http,$location,ParamsFrom_Home){
 
 	var a=ParamsFrom_Home.getProperty();
-	console.log(a);
 	$scope.signup=function(params)
 	{
-		// console.log(params.password.length);
 		$scope.validPassword="";
 		
 		if (!(params) || !(params.username) || !(params.password) || !(params.ConfirmPassword))

@@ -200,9 +200,7 @@ footer {
   background-color: #efefef;
   text-align: center;
 
-
 }
-
 
 nav
 {
@@ -231,7 +229,6 @@ nav a
     outline: none;
     
 }
-
 
 
 .SearchTaskInTable:active 
@@ -302,7 +299,7 @@ nav a
 }
 
 .article
-{
+{ 
     position: relative;
     margin-top: 95px;
 } 
@@ -359,4 +356,8 @@ legend {
 {
   position: absolute;
   margin-top: 15px;
+}
+
+th {
+  cursor: pointer;
 }

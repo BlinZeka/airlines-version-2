@@ -14,7 +14,26 @@
 
 .controller('TaskCtrl',['$scope','$http',function ($scope,$http){  
 	
-	
+	$scope.orderClick='id_task';
+	$scope.ascdesc=false;
+
+	$scope.changeOrder=function (param) 
+	{
+		$scope.AllTaskShow();
+
+		if($scope.orderClick==param){
+			if($scope.ascdesc==true){
+				$scope.ascdesc=false;
+			}
+			else
+			$scope.ascdesc=true;
+		}
+		else{
+			$scope.orderClick=param;
+			$scope.ascdesc=false;
+		}
+
+	}
 
 	$scope.tableTask=false;
 	$scope.spanShow1=true;
@@ -28,11 +47,11 @@
 		if($scope.selected==null || $scope.selected=="" || $scope.selected==" ")
 		{
 			$scope.ex = {width:'10px '};
-			console.log($scope.selected);
+
 		}
 		else {
 			$scope.ex = {width:'350px '};  
-			console.log("else");
+			
 		}
 	}
 
@@ -128,7 +147,13 @@
 		if($scope.length<3)
 			$scope.numrimax =$scope.length;	
 
+		if($scope.length==0)
+			{ 
+				$scope.numrimin =-1;
+			}
 		});
+		
+
 	}
 
 	$scope.addTask=function(param)
@@ -159,7 +184,6 @@
 
 				}).then(function (response) 
 				{
-				    console.log(response);
 				    //clear fild in form
 				})
 
@@ -256,12 +280,10 @@
 
 					}).then(function (response) 
 					{	
-					    console.log(response.data);
 					    
 					})
 					$scope.inputShow =-1;
 					$scope.AllTaskShow();
-					console.log(task.status1);
 			})
 	}
 
@@ -323,10 +345,7 @@
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: '#d33',
 		  confirmButtonText: 'Yes, delete it!',
-		  cancelButtonText: 'No, cancel!',
-		  confirmButtonClass: 'btn btn-success',
-		  cancelButtonClass: 'btn btn-danger',
-		  buttonsStyling: false
+		  cancelButtonText: 'No, cancel!'
 		}).then(function () {
 		  swal(
 		    'Deleted!',

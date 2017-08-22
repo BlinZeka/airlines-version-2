@@ -1,0 +1,23 @@
+{
+  "name": "airlines-version-2",
+  "description": "public/lib",
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "https://github.com/BlinZeka/airlines-version-2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.6"
+  },
+  "devDependencies": {
+    "angular-animate": "^1.6.6",
+    "angular-aria": "^1.6.6",
+    "jquery": "^3.2.1"
+  }
+}

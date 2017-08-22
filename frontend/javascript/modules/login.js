@@ -61,7 +61,6 @@
 	
 	$scope.signup=function(params)
 	{
-		// console.log(params.password.length);
 		$scope.validPassword="";
 		
 		if (!(params) || !(params.username) || !(params.password) || !(params.ConfirmPassword))
@@ -107,7 +106,6 @@
 				})
 
 				var a=SRV_app_signup.setPOne('ShowInputForUser');
-				console.log(a);
 				$location.path('/home');
 				$scope.showLogOut = true;
 				$scope.showFooter=true;
@@ -118,7 +116,6 @@
 
 	$scope.showLogin=function()
 	{
-		console.log(112);
 		$scope.showFrmSignup=false;
 		$scope.showFrmLogin=true;
 		$scope.showFooter=false;
@@ -126,7 +123,7 @@
 
 	$scope.showSignupFrm=function()
 	{
-		console.log(11);
+
 		$scope.showFrmSignup=true;
 		$scope.showFrmLogin=false;
 		$scope.showFooter=false;
@@ -135,10 +132,9 @@
 
 	$scope.btnLogin1=function(params)
 	{
-			
-		
-		 console.log(params);
-		 		$http({
+	
+
+	 		$http({
 			method: 'POST', //CHANGE THIS FROM GET TO POST
 			url: 'Database/Function.php?f=getUser',
 			params: { userN : params.Username , passW:params.Password }, //USE PROPER JAVASRIPT OBJECTS
@@ -151,7 +147,6 @@
 				{
 					//sweet alert warning ->you heve fill in wrong way fields
 
-						console.log('Click event');
 						$scope.showLogOut = true;
 
 						if(response.data["0"].role_user == 'Admin'){
@@ -166,7 +161,7 @@
 						swal('Wrong this user not exist!');
 
 				}
-				 console.log(response.data);
+
 				 $scope.showFooter=true;
 			
 			})
@@ -179,7 +174,7 @@
 		$scope.showFrmSignup=false;
 		$scope.showFrmLogin=true;
 		$scope.showFooter=false;
-		location.relode();
+		location.reload();
 	}
 
 

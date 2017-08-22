@@ -7,6 +7,7 @@
     <label >Password</label><br>
     <input class="txtInputLogin" type="password" id="lname" placeholder="Password" ng-model="user.Password"><br>
     <input   class="btnLogIn" type="submit"  value="Submit">
+    
  <!-- 	 <input  class="btnLogIn" type="submit" value="Submit"> -->
   </form><br>
 

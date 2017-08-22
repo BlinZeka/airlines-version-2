@@ -4,8 +4,6 @@
 		// 	return false;
 		// } ... 
 ?>
-
-
 <div class="TaskMenager">
 	<div class="tbl" ng-hide="hideTableAndAddForm">
 	<div ng-show="admin">
@@ -30,9 +28,15 @@
 <!--   -->
 	<div class="tableTaskData" >
 
-			<table class="table tblTask">
-				<tr ><th>Id</th><th>Task</th><th>Status</th><th>Date</th><th>Modify</th></tr>
-				<tr  ng-repeat="task in tasks | orderBy : 'id_task' | filter:selected as filtered" ng-if="($index >= numrimin  && $index < numrimax)"><!-- perseritja e rreshtave  -->
+			<table class="table tblTask tbl-hover table-bordered">
+				<tr>
+					<th ng-click="changeOrder('id_task')">id</th>
+					<th ng-click="changeOrder('taskname')">Task</th>
+					<th ng-click="changeOrder('status')">Status</th>
+					<th ng-click="changeOrder('date_created')">Date</th>
+					<th>Modify</th>
+				</tr>
+				<tr  ng-repeat="task in tasks | orderBy : orderClick:ascdesc | filter:selected as filtered " ng-if="($index >= numrimin  && $index < numrimax)"><!-- perseritja e rreshtave  -->
 					<td>
 						{{task.id_task}}
 					</td>
